@@ -59,7 +59,7 @@ public class ProxySorterBuilder extends RouteBuilder {
                 .enrich("direct:RequestFrom1c",new Req11And1CAgregate())
                 .to(ExchangePattern.InOnly,"direct:SaveToRepoSorter")
                 .choice()
-                .when(header(ConstantsSorter.PROPERTY_RSCEIVEDCSP).isEqualTo("1")).to(ExchangePattern.InOnly,"activemq:queue:Sorter.Meashure").end()
+                .when(header(ConstantsSorter.PROPERTY_RSCEIVEDCSP).isEqualTo("0")).to(ExchangePattern.InOnly,"activemq:queue:Sorter.Meashure").end()
                 .process(new Req11toResp12())
                 ;
 
@@ -95,45 +95,9 @@ public class ProxySorterBuilder extends RouteBuilder {
 
 //Сохраним значение сопоставления PLU - штрих код        
         from("direct:SaveToRepoSorter")
-                .process(new Processor() {
-                    @Override
-                    public void process(Exchange exchng) throws Exception {
-
-                        Message in = exchng.getIn();
-                        Request11 resourceResponse =  in.getBody(Request11.class);
-
-                        exchng.setProperty(String.valueOf(resourceResponse.getCodePLK()),resourceResponse.getBarcode1С());
-
-                        Short StatusSize    = resourceResponse.getStateSize();
-                        Short StatuzWeight  = resourceResponse.getStateWeight();
-//Получили значения статусов равные 0 то будем отправлять данные в 1С
-                        if (StatusSize==0&StatuzWeight==0) {
-                            in.setHeader(ConstantsSorter.PROPERTY_RSCEIVEDCSP,"0");
-                        }
-                        else {
-                            in.setHeader(ConstantsSorter.PROPERTY_RSCEIVEDCSP,"1");
-                        }
-                        in.setHeader(ConstantsSorter.PROPERTY_STATUS_SIZE ,StatusSize);
-                        in.setHeader(ConstantsSorter.PROPERTY_STATUS_WEIGHT ,StatuzWeight);
-                        //in.setHeader("ReceivedCSP","1");
-                        in.setHeader(EhcacheConstants.ACTION, EhcacheConstants.ACTION_PUT);
-                        in.setHeader(EhcacheConstants.KEY, resourceResponse.getCodePLK()) ;                       
-
-
-                    };})
+                .process(new ProcessorSaveToRepoSorter())
                 .to("ehcache://SorterPluBarcodeCache?keyType=java.lang.Integer");
 
-//                .to("cache://SorterPluBarcodeCache"
-//                        + "?maxElementsInMemory=1000"
-//                        +"&memoryStoreEvictionPolicy=MemoryStoreEvictionPolicy.FIFO" 
-//                        +"&overflowToDisk=true" 
-//                        +"&eternal=true" 
-//                        +"&timeToLiveSeconds=300"
-////                        +"&timeToIdleSeconds=true" 
-//                        +"&diskPersistent=true" 
-//                        +"&diskExpiryThreadIntervalSeconds=300"
-//                );
-        
 // своего рода подзапрос в 1с для получения правильного штрих кода и номера выхода
        from("direct:RequestFrom1c")
                .process(new ProcessorRequestSorter())
