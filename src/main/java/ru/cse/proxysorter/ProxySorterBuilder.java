@@ -74,7 +74,7 @@ public class ProxySorterBuilder extends RouteBuilder {
 
 //111 код снятия мешка с ТСД отправляемый в 1C
         from("direct:Request111")
-           .process(new Req111To1C()).to("activemq:queue:Sorter.FullBagAndCreateDocumentIn1C");
+           .process(new Req111To1C()).to("activemq:queue:Sorter.1CReplacingTheBag");
 
 //        from("activemq:queue:Sorter.1CReplacingTheBag").to("cxf:bean:reportIncident");
             //    to("cxf:bean:reportIncident");

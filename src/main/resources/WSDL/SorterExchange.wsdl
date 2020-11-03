@@ -296,11 +296,11 @@
 				<wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/"
 						conformsTo="http://ws-i.org/profiles/basic/1.1"/>
 			</documentation>
-			<soapbind:address location="http://web.cse.ru/cse82_reg/ws/SorterExchange"/>
+			<soapbind:address location="http://sp1/cse82_reg/ws/SorterExchange"/>
 		</port>
 		<port name="SorterExchangeSoap12"
 				binding="tns:SorterExchangeSoap12Binding">
-			<soap12bind:address location="http://web.cse.ru/cse82_reg/ws/SorterExchange"/>
+			<soap12bind:address location="http://sp1/cse82_reg/ws/SorterExchange"/>
 		</port>
 	</service>
 </definitions>

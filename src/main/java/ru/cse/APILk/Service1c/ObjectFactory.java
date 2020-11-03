@@ -1,10 +1,7 @@
 
 package ru.cse.APILk.Service1c;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
-import javax.xml.namespace.QName;
 
 
 /**
@@ -24,8 +21,6 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _ResultStringValue_QNAME = new QName("http://www.cse-cargo.ru/MeasurerCargo", "Value");
-    private final static QName _ResultStringErrorInfo_QNAME = new QName("http://www.cse-cargo.ru/MeasurerCargo", "ErrorInfo");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ru.cse.APILk.Service1c
@@ -35,43 +30,67 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Measurement }
+     * Create an instance of {@link GetDataPushExit }
      * 
      */
-    public Measurement createMeasurement() {
-        return new Measurement();
+    public GetDataPushExit createGetDataPushExit() {
+        return new GetDataPushExit();
     }
 
     /**
-     * Create an instance of {@link MeasurementResponse }
+     * Create an instance of {@link GetDataPushExitResponse }
      * 
      */
-    public MeasurementResponse createMeasurementResponse() {
-        return new MeasurementResponse();
+    public GetDataPushExitResponse createGetDataPushExitResponse() {
+        return new GetDataPushExitResponse();
     }
 
     /**
-     * Create an instance of {@link ResultString }
+     * Create an instance of {@link ProductDelivery }
      * 
      */
-    public ResultString createResultString() {
-        return new ResultString();
+    public ProductDelivery createProductDelivery() {
+        return new ProductDelivery();
     }
 
     /**
-     * Create an instance of {@link FotoCargo }
+     * Create an instance of {@link ProductDeliveryResponse }
      * 
      */
-    public FotoCargo createFotoCargo() {
-        return new FotoCargo();
+    public ProductDeliveryResponse createProductDeliveryResponse() {
+        return new ProductDeliveryResponse();
     }
 
     /**
-     * Create an instance of {@link FotoCargoResponse }
+     * Create an instance of {@link ProductPurposeManualLoading }
      * 
      */
-    public FotoCargoResponse createFotoCargoResponse() {
-        return new FotoCargoResponse();
+    public ProductPurposeManualLoading createProductPurposeManualLoading() {
+        return new ProductPurposeManualLoading();
+    }
+
+    /**
+     * Create an instance of {@link ProductPurposeManualLoadingResponse }
+     * 
+     */
+    public ProductPurposeManualLoadingResponse createProductPurposeManualLoadingResponse() {
+        return new ProductPurposeManualLoadingResponse();
+    }
+
+    /**
+     * Create an instance of {@link ReplacingTheBag }
+     * 
+     */
+    public ReplacingTheBag createReplacingTheBag() {
+        return new ReplacingTheBag();
+    }
+
+    /**
+     * Create an instance of {@link ReplacingTheBagResponse }
+     * 
+     */
+    public ReplacingTheBagResponse createReplacingTheBagResponse() {
+        return new ReplacingTheBagResponse();
     }
 
     /**
@@ -88,24 +107,6 @@ public class ObjectFactory {
      */
     public PingResponse createPingResponse() {
         return new PingResponse();
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.cse-cargo.ru/MeasurerCargo", name = "Value", scope = ResultString.class)
-    public JAXBElement<String> createResultStringValue(String value) {
-        return new JAXBElement<String>(_ResultStringValue_QNAME, String.class, ResultString.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.cse-cargo.ru/MeasurerCargo", name = "ErrorInfo", scope = ResultString.class)
-    public JAXBElement<String> createResultStringErrorInfo(String value) {
-        return new JAXBElement<String>(_ResultStringErrorInfo_QNAME, String.class, ResultString.class, value);
     }
 
 }

@@ -24,11 +24,22 @@ public class Processor13ToMeashure implements Processor{
 
             Request11 Req11 = exchange.getIn().getBody(Request11.class);
             Measurement Reqto1C = new Measurement();
-            Reqto1C.setHeight(Float.valueOf(Req11.getHeight()));
-            Reqto1C.setLength(Float.valueOf(Req11.getLength()));
-            Reqto1C.setWidth(Float.valueOf(Req11.getWidth()));
-            Reqto1C.setWeight(Float.valueOf(Req11.getWeight()));
+            //Сортировщик отдает в мм размера, а вес в кг.
+            if (!(Req11==null)) {
+            float weight = Float.valueOf(Req11.getWeight());
+            Reqto1C.setHeight(Float.valueOf(Req11.getHeight())/10);
+            Reqto1C.setLength(Float.valueOf(Req11.getLength())/10);
+            Reqto1C.setWidth(Float.valueOf(Req11.getWidth())/10);
+            Reqto1C.setWeight(weight);
             Reqto1C.setNumber(Req11.getBarcode1С());
+        }
+            else {
+            Reqto1C.setHeight(Float.valueOf(1));
+            Reqto1C.setLength(Float.valueOf(1));
+            Reqto1C.setWidth(Float.valueOf(1));
+            Reqto1C.setWeight(Float.valueOf(1));
+            Reqto1C.setNumber("request 11 is null");
+        }
             //Гуид для 1с чтобы получить пользователя
             //Ждем обновления webservice Measurer
             //Reqto1C.setMeasurementSource("754208e4-6e15-489a-af0d-f589e6569895");

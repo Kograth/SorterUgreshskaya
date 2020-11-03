@@ -19,6 +19,8 @@ public class ProxySorterBuilderActiveMQ  extends RouteBuilder{
 
         from ("activemq:queue:Sorter.FullBagAndCreateDocumentIn1C").to("cxf:bean:reportIncident");
 
+        from ("activemq:queue:Sorter.1CReplacingTheBag").to("cxf:bean:reportIncident");
+
         from("activemq:queue:Sorter.Request11To1C").to("cxf:bean:reportIncident");
 
     }
