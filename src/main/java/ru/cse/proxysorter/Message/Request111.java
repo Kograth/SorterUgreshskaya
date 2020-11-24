@@ -11,12 +11,12 @@ public class Request111 extends Request4All {
 
     private short smlSTX            = 0x02;
     private short Command           = MESSAGE_CODE;
-    private byte ExitNumber         = 0x31;
+    private short ExitNumber         = 0x31;
     private  byte Reserv            = 0x1C;
     private short smlETX            = 0x03;
     private String BagBarCode       = "";
 
-    public byte getExitNumber() {
+    public short getExitNumber() {
         return ExitNumber;
     }
 
@@ -40,7 +40,7 @@ public class Request111 extends Request4All {
 
         smlSTX          = msg.readUnsignedByte();
         Command         = msg.readUnsignedByte();
-        ExitNumber      = msg.readByte();
+        ExitNumber      = (short)(msg.readByte() & 0xFF);
         msg.readBytes(Array);
         BagBarCode      = new String(Array);
         Reserv          = msg.readByte();

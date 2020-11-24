@@ -27,9 +27,9 @@ public class Processor13ToMeashure implements Processor{
             //Сортировщик отдает в мм размера, а вес в кг.
             if (!(Req11==null)) {
             float weight = Float.valueOf(Req11.getWeight());
-            Reqto1C.setHeight(Float.valueOf(Req11.getHeight())/10);
-            Reqto1C.setLength(Float.valueOf(Req11.getLength())/10);
-            Reqto1C.setWidth(Float.valueOf(Req11.getWidth())/10);
+            Reqto1C.setHeight(Float.valueOf(Req11.getHeight()));
+            Reqto1C.setLength(Float.valueOf(Req11.getLength()));
+            Reqto1C.setWidth(Float.valueOf(Req11.getWidth()));
             Reqto1C.setWeight(weight);
             Reqto1C.setNumber(Req11.getBarcode1С());
         }

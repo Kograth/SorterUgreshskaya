@@ -13,8 +13,9 @@ public class Req111To1C implements Processor {
     public void process(Exchange exchange) throws Exception {
 
         Request111 Req111 = exchange.getIn().getBody(Request111.class);
-
-        String ExitNumber = String.valueOf(Req111.getExitNumber());
+        //Что бы не менять сборку ТСД делаем не хитрое преобразование с типом данных.
+        Short aExitNumber = Req111.getExitNumber();
+        String ExitNumber = aExitNumber.toString();
         String BagBarCode = String.valueOf(Req111.getBagBarCode());
 
         ReplacingTheBag ParametersOUT18 = new ReplacingTheBag();
